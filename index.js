@@ -136,14 +136,15 @@ async function downloadYTSongs(ids) {
 		}
 		if (_process.queue.length < concurrency && _process.remaining.length > 0) {
 			const id = _process.remaining.shift()
+			console.log('Preparing download: ' + id)
 			_downloader.download(id)
 			setTimeout(() => {
 				if (!_process.done[id] && !_process.progress[id] && !_process.error[id]) {
-					_process.error[id] = 'Downloading has never been started: 7s timeout reached'
+					_process.error[id] = 'Downloading has never been started: 10s timeout reached'
 					const index = _process.queue.indexOf(id)
 					_process.queue.splice(index, 1)
 				}
-			}, 7000)
+			}, 10000)
 			_process.queue.push(id)
 		}
 	}, 500)
