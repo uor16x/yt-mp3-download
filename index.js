@@ -17,12 +17,9 @@ const idParser = link => {
 
 dotenv.config()
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path,
-	ffprobePath = require('@ffprobe-installer/ffprobe').path,
 	ffmpeg = require('fluent-ffmpeg')
 
-ffmpeg.setFfprobePath(ffprobePath)
 process.env['FFMPEG_PATH'] = ffmpegPath
-process.env['FFPROBE_PATH'] = ffprobePath
 
 const queue = {}
 const app = express()
