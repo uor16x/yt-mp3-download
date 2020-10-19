@@ -1,0 +1,38 @@
+.env
+PORT=1234 // Port to listen
+BASE_URL=http://localhost:1234/ // Base URL for song links
+
+POST /playlist
+body: { "id": "some youtube playlist id" }
+response: process id // uuid string
+
+POST /songs
+body: { ids: {'id1', 'id2', ... } } // YT videos ids
+response: process id // uuid string
+
+GET /progress/:id // process ID from /playlist or /songs API
+response:
+{
+    "ids": [ "id1","id2", ... ], // list of all ids
+    "remaining": [ "id1","id2", ... ], // list of all ids,
+    "error": {
+        "id3": "Downloading has never been started: 7s timeout reached" // list of ids with error while downloading
+    },
+    "progress": {
+        "id4": "encoding", // Downloading finished and audio is encoding to 320 kbps
+        "id5": 35, // 35% download progress
+        "id6": 22 // 22% download progress
+    },
+    "done": {
+        "id7": {
+            "name": "Artist - Title",
+            "url": "http://localhost:1234/song/d183ea3f-62cc-484f-86f3-4a1ac9f5c982"
+        },
+        "id8": {
+            "name": "Artist2 - Title2",
+            "url": "http://localhost:1234/song/c11a763d-7174-45b7-ae45-01ba0ea9a145"
+        },
+    },
+    "queue": [ "id1","id2", ... ], // items which are currently in queue
+}
+
